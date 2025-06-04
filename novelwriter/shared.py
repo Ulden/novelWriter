@@ -32,8 +32,8 @@ from time import time
 from typing import TYPE_CHECKING, TypeVar
 
 from PyQt6.QtCore import QObject, QRunnable, QThreadPool, QTimer, QUrl, pyqtSignal, pyqtSlot
-from PyQt6.QtGui import QDesktopServices, QFont
-from PyQt6.QtWidgets import QFileDialog, QFontDialog, QMessageBox, QWidget
+from PyQt6.QtGui import QDesktopServices, QFont, QScreen
+from PyQt6.QtWidgets import QApplication, QFileDialog, QFontDialog, QMessageBox, QWidget
 
 from novelwriter.common import formatFileFilter
 from novelwriter.constants import nwFiles
@@ -150,6 +150,11 @@ class SharedData(QObject):
         """Return the last alert message."""
         return self._lastAlert
 
+    @property
+    def mainScreen(self) -> QScreen | None:
+        """Return the screen of the main window."""
+        return QApplication.screenAt(self.mainGui.rect().center())
+
     ##
     #  Setters
     ##
@@ -170,6 +175,7 @@ class SharedData(QObject):
         is created.
         """
         self._theme = theme
+        self._theme.initThemes()
         return
 
     def initSharedData(self, gui: GuiMain) -> None:

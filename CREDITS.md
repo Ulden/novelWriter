@@ -39,6 +39,10 @@ Additional larger translation contributions:
 * **French:** Albert Aribaud (aaribaud)
 * **Portuguese:** Oli Maia (olimaia)
 
+Translations of the documentation:
+
+* **French:** Jean-Michel Heras (Karduin)
+
 Translations are managed on [Crowdin](https://crowdin.com/project/novelwriter), and more
 contributions are listed on the project's Members page.
 
@@ -58,8 +62,8 @@ Some of the assets bundled with novelWriter were adapted from the following sour
 * **Material Symbols** icons by Google Inc (Apache 2.0)
 * **Remix** icons by RemixIcon (Apache 2.0)
 * **Font Awesome** icons by Fonticons Inc (CC BY 4.0)
-* **Tomorrow** syntax themes by Chris Kempson (MIT License)
-* **Owl** syntax themes by Sarah Drasner (MIT License)
+* **Tomorrow** themes by Chris Kempson (MIT License)
+* **Owl** themes by Sarah Drasner (MIT License)
 * **Solarized** themes by Ethan Schoonover (MIT License)
 * **Cyberpunk Night** theme by Anders Lemvigh (CC BY-SA 4.0)
 * **Dracula** theme by Zeno Rocha (MIT License)
