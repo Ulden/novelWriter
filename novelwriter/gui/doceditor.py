@@ -1117,7 +1117,7 @@ class GuiDocEditor(QPlainTextEdit):
         return
 
     def inputMethodEvent(self, event: QInputMethodEvent) -> None:
-        """处理输入法事件"""
+        """Handle input method events."""
         super().inputMethodEvent(event)
         if event.commitString():
             self.ensureCursorVisible()
@@ -1128,7 +1128,7 @@ class GuiDocEditor(QPlainTextEdit):
                 self._completer.move(pos)
 
     def inputMethodQuery(self, query: Qt.InputMethodQuery) -> Any:
-        """处理输入法查询"""
+        """Handle input method queries."""
         result = super().inputMethodQuery(query)
         if query == Qt.InputMethodQuery.ImCursorRectangle:
             # 获取光标矩形
@@ -2231,36 +2231,38 @@ class GuiDocEditor(QPlainTextEdit):
         return
 
     def _calculatePopupPosition(self) -> QPoint:
-        """计算输入框应该显示的位置。
-        返回一个全局坐标系中的点，表示输入框的左上角位置。
+        """Calculate where the completion popup should appear.
+
+        Returns a point in global coordinates for the popup's top-left
+        corner.
         """
         cursorRect = self.cursorRect()
         viewportPos = self.viewport().mapToGlobal(cursorRect.bottomLeft())
 
-        # 设置基础位置：光标正下方
+        # Set the base position: just below the cursor
         point = QPoint(viewportPos.x(), viewportPos.y() + cursorRect.height() + 5)
 
-        # 获取屏幕几何信息
+        # Get screen geometry information
         screen = QApplication.primaryScreen().geometry()
         popupSize = self._completer.sizeHint()
 
-        # 检查是否会超出屏幕底部
+        # Check if the popup would extend beyond the bottom of the screen
         if point.y() + popupSize.height() > screen.bottom():
-            # 如果会超出底部，改为显示在光标上方
+            # If it does, show the popup above the cursor
             point.setY(viewportPos.y() - popupSize.height() - cursorRect.height() - 5)
 
-        # 检查是否会超出屏幕右侧
+        # Check if the popup would extend past the right edge of the screen
         if point.x() + popupSize.width() > screen.right():
             point.setX(screen.right() - popupSize.width())
 
         return point
 
     def _showCompleter(self, text: str, cursorPos: int) -> None:
-        """显示自动完成输入框。
+        """Show the completion popup.
 
         Args:
-            text: 当前行的文本
-            cursorPos: 光标在当前行中的位置
+            text: text of the current line
+            cursorPos: cursor position within the line
         """
         if show := self._completer.updateText(text, cursorPos):
             point = self._calculatePopupPosition()
